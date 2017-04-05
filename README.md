@@ -1,3 +1,7 @@
+# QTPPSPC
+###### Windows Pseudo PHP Server's Pseudo Client
+### Example
+```c++
 #include <iostream>
 #include "winppspc.h"
 
@@ -12,3 +16,5 @@ int main(int argc, char *argv[])
     cout<<readPPSReplyType(rep.replyType)<<' '<<rep.reply<<'\n';
     return 0;
 }
+
+```
