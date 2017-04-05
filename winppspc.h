@@ -1,11 +1,11 @@
-#ifndef QTPPSPC_H
-#define QTPPSPC_H
-#include "nircek-qteasyhttpclient/nircek-qteasyhttpclient.h"
+#ifndef WINPPSPC_H
+#define WINPPSPC_H
+#include "wineasyhttpclient/wineasyhttpclient.hpp"
 namespace GitHub {
     namespace Nircek {
 
         typedef enum PPSReplyType{
-            good,paramerror,dberror,httperror,error
+            good,paramerror,dberror,winineterror,error
         } PPSReplyType;
         QString readPPSReplyType(PPSReplyType);
 
@@ -19,16 +19,16 @@ namespace GitHub {
             void construct(PPSReplyType,QString);
         } PPSReply;
 
-        class qtppspc {
+        class winppspc {
             QString host,user,pass;
             QObject *parent;
             PPSReply toReply(QString);
         public:
-            qtppspc(QString host, QString user, QString pass, QObject *parent=nullptr);
-            ~qtppspc();
+            winppspc(QString host, QString user, QString pass, QObject *parent=nullptr);
+            ~winppspc();
             PPSReply refresh();
             PPSReply push(QString event);
         };
     }
 }
-#endif // QTPPSPC_H
+#endif // winppspc_H
