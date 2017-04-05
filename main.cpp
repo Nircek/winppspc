@@ -1,9 +1,14 @@
 #include <iostream>
+#include "winppspc.h"
 
 using namespace std;
-
-int main()
+using namespace GitHub::Nircek;
+int main(int argc, char *argv[])
 {
-    cout << "Hello world!" << endl;
+    winppspc pc("http://localhost","admin","admin");
+    PPSReply rep=pc.push("everything");
+    cout<<readPPSReplyType(rep.replyType)<<' '<<rep.reply<<'\n';
+    rep=pc.refresh();
+    cout<<readPPSReplyType(rep.replyType)<<' '<<rep.reply<<'\n';
     return 0;
 }
