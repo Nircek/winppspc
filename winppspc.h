@@ -7,27 +7,26 @@ namespace GitHub {
         typedef enum PPSReplyType{
             good,paramerror,dberror,winineterror,error
         } PPSReplyType;
-        QString readPPSReplyType(PPSReplyType);
+        std::string readPPSReplyType(PPSReplyType);
 
         typedef struct PPSReply{
             PPSReplyType replyType;
-            QString reply;
+            std::string reply;
 
-            PPSReply(PPSReplyType,QString);
-            PPSReply(char, QString);
+            PPSReply(PPSReplyType,std::string);
+            PPSReply(char, std::string);
         private:
-            void construct(PPSReplyType,QString);
+            void construct(PPSReplyType,std::string);
         } PPSReply;
 
         class winppspc {
-            QString host,user,pass;
-            QObject *parent;
-            PPSReply toReply(QString);
+            std::string host,user,pass;
+            PPSReply toReply(std::string);
         public:
-            winppspc(QString host, QString user, QString pass, QObject *parent=nullptr);
+            winppspc(std::string host, std::string user, std::string pass);
             ~winppspc();
             PPSReply refresh();
-            PPSReply push(QString event);
+            PPSReply push(std::string event);
         };
     }
 }

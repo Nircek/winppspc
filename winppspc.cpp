@@ -1,14 +1,14 @@
 #include "winppspc.h"
 using namespace GitHub::Nircek;
-winppspc::winppspc(QString host, QString user, QString pass, QObject *parent):
-    host(host),user(user),pass(pass),parent(parent){
+winppspc::winppspc(std::string host, std::string user, std::string pass):
+    host(host),user(user),pass(pass){
 
 }
 
 winppspc::~winppspc(){
 
 }
-QString GitHub::Nircek::readPPSReplyType(PPSReplyType type){
+std::string GitHub::Nircek::readPPSReplyType(PPSReplyType type){
     switch(type){
     case good:          return "good";
     case paramerror:    return "paramERR";
@@ -19,7 +19,7 @@ QString GitHub::Nircek::readPPSReplyType(PPSReplyType type){
     return "impossibleERR";
 }
 
-PPSReply::PPSReply(char c, QString s):
+PPSReply::PPSReply(char c, std::string s):
     reply(s){
     switch(c){
     case '0':   construct(good,s);          break;
@@ -30,21 +30,21 @@ PPSReply::PPSReply(char c, QString s):
     }
 }
 
-PPSReply::PPSReply(PPSReplyType type, QString s){
+PPSReply::PPSReply(PPSReplyType type, std::string s){
     construct(type,s);
 }
 
-void PPSReply::construct(PPSReplyType type, QString s){
+void PPSReply::construct(PPSReplyType type, std::string s){
     replyType=type;
     reply=s;
 }
 
 PPSReply winppspc::refresh(){
-    return toReply(qteasyhttpclient(host+"/refresh.php?user="+user+"&pass="+pass,parent));
+    return toReply(wineasyhttpclient(host+"/refresh.php?user="+user+"&pass="+pass));
 }
-PPSReply winppspc::push(QString event){
-    return toReply(qteasyhttpclient(host+"/push.php?user="+user+"&pass="+pass+"&event="+event,parent));
+PPSReply winppspc::push(std::string event){
+    return toReply(wineasyhttpclient(host+"/push.php?user="+user+"&pass="+pass+"&event="+event));
 }
-PPSReply winppspc::toReply(QString s){
-    return PPSReply(s.mid(0,1).toLatin1()[0],s.mid(1));
+PPSReply winppspc::toReply(std::string s){
+    return PPSReply(s.at(0),s.substr(1));
 }
