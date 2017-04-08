@@ -23,10 +23,13 @@ namespace GitHub {
             std::string host,user,pass;
             PPSReply toReply(std::string);
         public:
+            winppspc();
+            winppspc(std::string host);
             winppspc(std::string host, std::string user, std::string pass);
             ~winppspc();
             PPSReply refresh();
             PPSReply push(std::string event);
+            PPSReply uregister(std::string user,std::string pass);
         };
     }
 }
