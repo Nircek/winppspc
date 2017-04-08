@@ -35,6 +35,9 @@ GitHub::Nircek::PPSReply::PPSReply(char c, std::string s):
 GitHub::Nircek::PPSReply::PPSReply(PPSReplyType type, std::string s){
     construct(type,s);
 }
+GitHub::Nircek::PPSReply::PPSReply(){
+    PPSReply(0,"");
+}
 
 void GitHub::Nircek::PPSReply::construct(PPSReplyType type, std::string s){
     replyType=type;
@@ -55,4 +58,10 @@ GitHub::Nircek::PPSReply GitHub::Nircek::winppspc::uregister(std::string user,st
 }
 GitHub::Nircek::PPSReply GitHub::Nircek::winppspc::toReply(std::string s){
     return PPSReply(s.at(0),s.substr(1));
+}
+GitHub::Nircek::PPSReply GitHub::Nircek::readerror(PPSReply reply){
+    if(reply.replyType!=good){
+        std::cout<<readPPSReplyType(reply.replyType)<<' '<<reply.reply<<'\n';
+    }
+    return reply;
 }
