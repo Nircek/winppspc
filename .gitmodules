@@ -1,0 +1,3 @@
+[submodule "wineasyhttpclient"]
+	path = wineasyhttpclient
+	url = git@github.com:Nircek/wineasyhttpclient
