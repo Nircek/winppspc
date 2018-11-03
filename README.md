@@ -1,4 +1,4 @@
-# QTPPSPC
+# WINPPSPC
 ###### Windows Pseudo PHP Server's Pseudo Client
 ### Example
 ```c++
